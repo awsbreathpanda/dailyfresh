@@ -130,3 +130,9 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'user.User'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}
