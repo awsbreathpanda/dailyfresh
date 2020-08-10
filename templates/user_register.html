@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>天天生鲜用户注册</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-maizi.css' %}" />
+  </head>
+  <body class="body-top">
+    <!-- content -->
+    <section id="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img
+              data-src="holder.js/100px500"
+              class="img-responsive"
+              alt="Image"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="alert alert-danger hidden" id="alert-id">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-hidden="true"
+              >
+                &times;
+              </button>
+              <p id="err-msg-id">{{ errmsg }}</p>
+            </div>
+
+            <form action="{% url 'user:register' %}" method="POST" role="form">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">用户名</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">密码</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                />
+              </div>
+              <div class="form-group">
+                <label for="rpassword">重复密码</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="rpassword"
+                  name="rpassword"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">邮箱</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
+              </div>
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="on" name="allow" />
+                  同意天天生鲜用户协议
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary">注册</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <div class="container">
+        <div class="row row-top row-buttom">
+          <div class="col-md-12 text-center">
+            <p>
+              Copyright&nbsp;©&nbsp;2012-2015&nbsp;&nbsp;www.maizi.com&nbsp;&nbsp;蜀ICP备13014270号-4
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/holder.js' %}"></script>
+    <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+      $(function () {
+        var errmsg = $('#err-msg-id').text();
+        if(errmsg){
+          $('#alert-id').removeClass('hidden');
+        }
+      });
+    </script>
+  </body>
+</html>
