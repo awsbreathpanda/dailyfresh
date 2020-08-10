@@ -1,7 +1,10 @@
+from django.core.mail import send_mail
 from apps.user.models import User
 import re
 from django.shortcuts import render
 from django.views import View
+from utils.security import get_user_token, get_activation_link
+from django.conf import settings
 
 
 # Create your views here.
@@ -45,6 +48,27 @@ class RegisterView(View):
         user = User.objects.create_user(username, email, password)
         user.is_active = 0
         user.save()
+
+        user_token = get_user_token(user.id)
+        activation_link = get_activation_link(settings.ACTIVATION_URL_PATH,
+                                              user_token)
+
+        # send email
+        subject = '天天生鲜欢迎信息'
+        message = ''
+        html_message = (
+            '<h1>%s，欢迎您成为天天生鲜的注册会员</h1><p>请点击以下链接激活你的账户</p><br><a href="%s">%s</a>'
+            % (username, activation_link, activation_link))
+        from_email = 'dailyfresh<awsbreathpanda@163.com>'
+        recipient_list = [
+            'awsbreathpanda@163.com',
+        ]
+
+        send_mail(subject,
+                  message,
+                  from_email,
+                  recipient_list,
+                  html_message=html_message)
 
         context = {'errmsg': '添加用户成功'}
         return render(request, 'user_register.html', context=context)

@@ -136,3 +136,10 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 600,
     'height': 400,
 }
+
+ACTIVATION_URL_PATH = 'http://127.0.0.1/user/activate'
+
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'awsbreathpanda@163.com'
+EMAIL_HOST_PASSWORD = 'OPJIVCIPEPOHYVBN'
