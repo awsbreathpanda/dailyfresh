@@ -137,7 +137,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
 }
 
-ACTIVATION_URL_PATH = 'http://127.0.0.1/user/activate'
+ACTIVATION_URL_PATH = 'http://127.0.0.1:8000/user/activate'
 
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25

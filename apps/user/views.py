@@ -3,8 +3,9 @@ from apps.user.models import User
 import re
 from django.shortcuts import render
 from django.views import View
-from utils.security import get_user_token, get_activation_link
+from utils.security import get_user_token, get_activation_link, get_user_id
 from django.conf import settings
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -72,3 +73,18 @@ class RegisterView(View):
 
         context = {'errmsg': '添加用户成功'}
         return render(request, 'user_register.html', context=context)
+
+
+# /user/activate/(token)
+class ActivateView(View):
+    def get(self, request, token):
+        token_bytes = token.encode('utf-8')
+
+        user_id = get_user_id(token_bytes)
+
+        user = User.objects.get(id=user_id)
+        user.is_active = 1
+        user.save()
+
+        # TODO
+        return HttpResponse('<h1>Activate User Successfully</h1>')
