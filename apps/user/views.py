@@ -1,4 +1,4 @@
-from django.core.mail import send_mail
+from celery_tasks.tasks import celery_send_mail
 from apps.user.models import User
 import re
 from django.shortcuts import render
@@ -65,11 +65,11 @@ class RegisterView(View):
             'awsbreathpanda@163.com',
         ]
 
-        send_mail(subject,
-                  message,
-                  from_email,
-                  recipient_list,
-                  html_message=html_message)
+        celery_send_mail.delay(subject,
+                               message,
+                               from_email,
+                               recipient_list,
+                               html_message=html_message)
 
         context = {'errmsg': '添加用户成功'}
         return render(request, 'user_register.html', context=context)
