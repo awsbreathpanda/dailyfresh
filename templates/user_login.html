@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>天天生鲜登录</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-maizi.css' %}" />
+  </head>
+  <body class="body-top">
+    <!-- content -->
+    <section id="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img
+              data-src="holder.js/100px500"
+              class="img-responsive"
+              alt="Image"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="alert alert-danger hidden" id="alert-id">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-hidden="true"
+              >
+                &times;
+              </button>
+              <p>
+                <span id="errmsg-id">{{ errmsg }}</span>
+              </p>
+            </div>
+
+            <form method="POST" role="form">
+              {% csrf_token %}
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  placeholder="请输入用户名"
+                  value="{{ username }}"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="请输入密码"
+                />
+              </div>
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="remember" value="on" {{checked}}/>
+                  记住用户名
+                </label>
+                <div class="pull-right">
+                  <a href="#">忘记密码</a>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">登录</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="text-center row-top row-buttom">
+        <p>Copyright @ 2012-2015 www.maizi.com 蜀ICP备13014270号-4</p>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/holder.js' %}"></script>
+    <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+      $(document).ready(function () {
+        var errmsg = $("#errmsg-id").text();
+        if (errmsg) {
+          $("#alert-id").removeClass("hidden");
+        }
+      });
+    </script>
+  </body>
+</html>

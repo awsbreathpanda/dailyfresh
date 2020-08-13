@@ -1,3 +1,5 @@
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
 from celery_tasks.tasks import celery_send_mail
 from apps.user.models import User
 import re
@@ -88,3 +90,48 @@ class ActivateView(View):
 
         # TODO
         return HttpResponse('<h1>Activate User Successfully</h1>')
+
+
+# /user/login
+class LoginView(View):
+    def get(self, request):
+        username = request.COOKIES.get('username')
+        checked = 'checked'
+        if username is None:
+            username = ''
+            checked = ''
+        context = {'username': username, 'checked': checked}
+        return render(request, 'user_login.html', context=context)
+
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        remember = request.POST.get('remember')
+
+        if not all([username, password]):
+            context = {'errmsg': '参数不完整'}
+            return render(request, 'user_login.html', context=context)
+
+        user = authenticate(request, username=username, password=password)
+        if user is None:
+            context = {'errmsg': '用户不存在'}
+            return render(request, 'user_login.html', context=context)
+
+        if not user.is_active:
+            context = {'errmsg': '用户未激活'}
+            return render(request, 'user_login.html', context=context)
+
+        login(request, user)
+
+        next_url = request.GET.get('next')
+        if next_url is None:
+            response = HttpResponse('Login successfully')
+        else:
+            response = redirect(next_url)
+
+        if remember == 'on':
+            response.set_cookie('username', username, max_age=7 * 24 * 3600)
+        else:
+            response.delete_cookie('username')
+
+        return response
