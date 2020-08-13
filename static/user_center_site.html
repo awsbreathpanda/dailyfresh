@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>天天生鲜-用户中心</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-maizi.css" />
+  </head>
+  <body class="body-top">
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+              <span
+                class="glyphicon glyphicon-grain text-primary"
+                aria-hidden="true"
+              ></span>
+              Maizi</a
+            >
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#">商品</a></li>
+              <li><a href="#">用户中心</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" />
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">登录</a></li>
+              <li><a href="#">注册</a></li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- content -->
+    <section id="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <article id="sub-nav">
+              <div class="list-group list-group-top">
+                <a href="#" class="list-group-item">个人信息</a>
+                <a href="#" class="list-group-item">全部订单</a>
+                <a href="#" class="list-group-item active">收货地址</a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-10">
+            <article id="site-info">
+              <h3>收货地址</h3>
+
+              <div class="well">
+                <p>当前地址：</p>
+                <p>
+                  北京市 海淀区 东北旺西路8号中关村软件园 （李思 收）182****7528
+                </p>
+              </div>
+
+              <h3>编辑地址</h3>
+
+              <div class="well">
+                <div class="row">
+                  <div class="col-md-6">
+                    <form action="" method="POST" role="form">
+                      <div class="form-group">
+                        <label for="receiver">收件人</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="receiver"
+                          name="receiver"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="address">详细地址</label>
+
+                        <input
+                          type="text"
+                          name="address"
+                          id="address"
+                          class="form-control"
+                          value=""
+                          required="required"
+                          pattern=""
+                          title=""
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="zipcode">邮编</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="zipcode"
+                          name="zipcode"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="phone">手机</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="phone"
+                          name="phone"
+                        />
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <div class="text-center row-top row-buttom">
+        <p>
+          Copyright @ 2012-2015 www.maizi.com 蜀ICP备13014270号-4
+        </p>
+      </div>
+    </footer>
+    <script src="js/holder.js"></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
