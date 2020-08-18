@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from celery_tasks.tasks import celery_send_mail
 from apps.user.models import User
 import re
@@ -8,6 +8,7 @@ from django.views import View
 from utils.security import get_user_token, get_activation_link, get_user_id
 from django.conf import settings
 from django.http import HttpResponse
+from django.urls import reverse
 
 
 # Create your views here.
@@ -123,11 +124,8 @@ class LoginView(View):
 
         login(request, user)
 
-        next_url = request.GET.get('next')
-        if next_url is None:
-            response = HttpResponse('Login successfully')
-        else:
-            response = redirect(next_url)
+        next_url = request.GET.get('next', reverse('goods:index'))
+        response = redirect(next_url)
 
         if remember == 'on':
             response.set_cookie('username', username, max_age=7 * 24 * 3600)
@@ -135,3 +133,44 @@ class LoginView(View):
             response.delete_cookie('username')
 
         return response
+
+
+# /user/
+class UserInfoView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            next_url = reverse(
+                'user:login') + '?next=' + request.get_full_path()
+            return redirect(next_url)
+        else:
+            return render(request, 'user_center_info.html')
+
+
+# /user/order/(page)
+class UserOrderView(View):
+    def get(self, request, page):
+        if not request.user.is_authenticated:
+            next_url = reverse(
+                'user:login') + '?next=' + request.get_full_path()
+            return redirect(next_url)
+        else:
+            return render(request, 'user_center_order.html')
+
+
+# /user/address
+class UserAddressView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            next_url = reverse(
+                'user:login') + '?next=' + request.get_full_path()
+            return redirect(next_url)
+        else:
+            return render(request, 'user_center_site.html')
+
+
+# /user/logout
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+
+        return redirect(reverse('goods:index'))

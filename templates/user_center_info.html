@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>天天生鲜-用户中心</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/bootstrap-maizi.css" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-maizi.css' %}" />
   </head>
   <body class="body-top">
     <!-- header -->
@@ -47,8 +48,16 @@
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">登录</a></li>
-              <li><a href="#">注册</a></li>
+
+
+              {% if user.is_authenticated %}
+                <li><a>
+                  欢迎您：{{ user.username }}
+                </a></li>
+              {% else %}
+                <li><a href="#">登录</a></li>
+                <li><a href="#">注册</a></li>
+              {% endif %}
             </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -63,9 +72,9 @@
           <div class="col-md-2">
             <article id="sub-nav">
               <div class="list-group list-group-top">
-                <a href="#" class="list-group-item active">个人信息</a>
-                <a href="#" class="list-group-item">全部订单</a>
-                <a href="#" class="list-group-item">收货地址</a>
+                <a href="{% url 'user:info' %}" class="list-group-item active">个人信息</a>
+                <a href="{% url 'user:order' 1 %}" class="list-group-item">全部订单</a>
+                <a href="{% url 'user:address' %}" class="list-group-item">收货地址</a>
               </div>
             </article>
           </div>
@@ -165,8 +174,8 @@
         </p>
       </div>
     </footer>
-    <script src="js/holder.js"></script>
-    <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{% static 'js/holder.js' %}"></script>
+    <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
 </html>
