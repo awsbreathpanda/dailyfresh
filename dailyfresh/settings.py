@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '192.168.0.100',
         'PORT': 3306,
         'USER': 'root',
         'PASSWORD': 'root',
@@ -138,7 +138,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
 }
 
-ACTIVATION_URL_PATH = 'http://127.0.0.1:8000/user/activate'
+ACTIVATION_URL_PATH = 'http://192.168.0.100:8000/user/activate'
 
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
@@ -148,7 +148,7 @@ EMAIL_HOST_PASSWORD = 'OPJIVCIPEPOHYVBN'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/9",
+        "LOCATION": "redis://192.168.0.100:6379/9",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
