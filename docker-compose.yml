@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   dailyfresh:
-    image: dailyfresh
+    image: breathpanda/dailyfresh
     deploy:
       replicas: 1
     ports:
